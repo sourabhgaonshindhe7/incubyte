@@ -1,10 +1,11 @@
 // add.js
 const add = (numbers) => {
-    if (numbers === "") return 0;
-    const splitedNumbers = numbers.split(/[\n,]/);
-    return splitedNumbers.reduce((acc, curr) => acc + (isNaN(curr) ? 0 : Number(curr)), 0);
+    const deleimter = numbers.startsWith('//') ? numbers[2] : ',';
+    const cleanedNumbers = numbers.startsWith('//') ? numbers.replace(`//${deleimter}\n`, '') : numbers;
+    
+    const splitedNumbers = cleanedNumbers.split(new RegExp(`[\\n${deleimter}]`));
+    return splitedNumbers.reduce((acc, curr) => acc + Number(curr), 0);
   };
   
-  // Export the function so it can be tested
   module.exports = add;
   

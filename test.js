@@ -23,6 +23,14 @@ function testAdd() {
     // Test: should return NaN for non-number inputs
     result = index("a,b,c");
     console.assert(isNaN(result), `Expected NaN but got ${result}`);
+
+    // Test: should handle custom delimiter specified at the beginning
+    result = index("//;\n1;2");
+    console.assert(result === 3, `Expected 3 but got ${result}`);
+
+    // Test: should support another custom delimiter with newlines
+    result = index("//|\n1|2|3\n4");
+    console.assert(result === 10, `Expected 10 but got ${result}`);
 }
 
 // Run tests
