@@ -31,6 +31,28 @@ function testAdd() {
     // Test: should support another custom delimiter with newlines
     result = index("//|\n1|2|3\n4");
     console.assert(result === 10, `Expected 10 but got ${result}`);
+
+    // Test: should throw an error when negative numbers are provided
+    try {
+        index("1,-2,3");
+        console.assert(false, "Expected an error but none was thrown");
+    } catch (error) {
+        console.assert(
+            error.message === "negative numbers not allowed -2", 
+            `Expected error message 'negative numbers not allowed -2' but got '${error.message}'`
+        );
+    }
+
+    // Test: should throw an error when multiple negative numbers are provided
+    try {
+        index("-1,-2,3");
+        console.assert(false, "Expected an error but none was thrown");
+    } catch (error) {
+        console.assert(
+            error.message === "negative numbers not allowed -1", 
+            `Expected error message 'negative numbers not allowed -1' but got '${error.message}'`
+        );
+    }
 }
 
 // Run tests
